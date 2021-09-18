@@ -1,0 +1,276 @@
+inherited NewFormFrame: TNewFormFrame
+  Size.Width = 443.000000000000000000
+  Size.Height = 856.000000000000000000
+  inherited MainLayout: TGridPanelLayout
+    Size.Width = 443.000000000000000000
+    Size.Height = 856.000000000000000000
+    ControlCollection = <
+      item
+        Column = 0
+        Control = HeaderRect
+        Row = 0
+      end
+      item
+        Column = 0
+        Control = Rectangle1
+        Row = 1
+      end
+      item
+        Column = 0
+        Control = ListView1
+        Row = 2
+      end>
+    RowCollection = <
+      item
+        Value = 6.312694933412268000
+      end
+      item
+        Value = 35.748920253046680000
+      end
+      item
+        Value = 57.938384813541060000
+      end>
+    inherited HeaderRect: TRectangle
+      Size.Width = 443.000000000000000000
+      Size.Height = 54.036666870117190000
+      inherited CaptionLbl: TLabel
+        Size.Width = 443.000000000000000000
+        Size.Height = 51.036666870117190000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        Text = 'Airlines'
+        inherited HamburgerImg: TPath
+          Size.Height = 34.036666870117190000
+          inherited HitBox: TLayout
+            Size.Height = 40.036666870117190000
+          end
+        end
+      end
+    end
+    object Rectangle1: TRectangle
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 433.000000000000000000
+      Size.Height = 296.010742187500000000
+      Size.PlatformDefault = False
+      Stroke.Thickness = 0.000000000000000000
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 30.000000000000000000
+        Position.Y = 15.000000000000000000
+        Margins.Left = 30.000000000000000000
+        Margins.Top = 15.000000000000000000
+        Margins.Right = 30.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 373.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'API Access Key'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object Edit2: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 30.000000000000000000
+        Position.Y = 67.000000000000000000
+        Margins.Left = 30.000000000000000000
+        Margins.Top = 15.000000000000000000
+        Margins.Right = 30.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 373.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Search query'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object Button1: TButton
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 30.000000000000000000
+        Margins.Top = 15.000000000000000000
+        Margins.Right = 30.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Position.X = 30.000000000000000000
+        Position.Y = 119.000000000000000000
+        Size.Width = 373.000000000000000000
+        Size.Height = 57.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Request'
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        OnClick = Button1Click
+      end
+    end
+    object ListView1: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 433.000000000000000000
+      Size.Height = 485.952575683593800000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 
+      'https://api.aviationstack.com/v1/airlines?access_key=211c1853f30' +
+      'f73f417f8180c2a0416eb&search=american&limit=5'
+    Params = <>
+    Left = 72
+    Top = 272
+  end
+  object RESTRequest1: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    Left = 152
+    Top = 264
+  end
+  object RESTResponse1: TRESTResponse
+    ContentType = 'application/json'
+    RootElement = 'data'
+    Left = 248
+    Top = 256
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    Response = RESTResponse1
+    NestedElements = True
+    Left = 312
+    Top = 320
+  end
+  object FDMemTable1: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'fleet_average_age'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'airline_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'callsign'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'hub_code'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'iata_code'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'icao_code'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'country_iso2'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'date_founded'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'iata_prefix_accounting'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'airline_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'country_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'fleet_size'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'status'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'type'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 160
+    Top = 336
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTable1
+    ScopeMappings = <>
+    Left = 192
+    Top = 448
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 308
+    Top = 413
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListView1
+      Track = True
+      FillDataSource = BindSourceDB1
+      FillDisplayFieldName = 'airline_name'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'country_name'
+      FillBreakGroups = <>
+    end
+  end
+end

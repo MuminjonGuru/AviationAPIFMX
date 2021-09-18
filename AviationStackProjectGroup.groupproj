@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4DFF474C-E167-4250-A6DE-55867C262A71}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Test\AviationStackFMX_tests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AviationStackFMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AviationStackFMX_tests">
+        <MSBuild Projects="Test\AviationStackFMX_tests.dproj"/>
+    </Target>
+    <Target Name="AviationStackFMX_tests:Clean">
+        <MSBuild Projects="Test\AviationStackFMX_tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AviationStackFMX_tests:Make">
+        <MSBuild Projects="Test\AviationStackFMX_tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AviationStackFMX">
+        <MSBuild Projects="AviationStackFMX.dproj"/>
+    </Target>
+    <Target Name="AviationStackFMX:Clean">
+        <MSBuild Projects="AviationStackFMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AviationStackFMX:Make">
+        <MSBuild Projects="AviationStackFMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AviationStackFMX_tests;AviationStackFMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AviationStackFMX_tests:Clean;AviationStackFMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AviationStackFMX_tests:Make;AviationStackFMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
